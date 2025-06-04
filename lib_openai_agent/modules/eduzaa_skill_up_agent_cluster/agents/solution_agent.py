@@ -2,7 +2,7 @@ from agents import Agent
 from ..tools import get_tinh_huong
 
 solution_agent = Agent(
-    name="Agent Giải pháp Hệ thống",
+    name="AgentDuaRaGiaiPhap",
     model="gpt-4o-mini",
     handoff_description="Chuyên gia đưa ra cách giải quyết chi tiết và hướng dẫn cụ thể cho tình huống va danh gia cau tra loi cua nguoi dung",
     instructions="""Bạn là chuyên gia đưa ra giải pháp hệ thống. Nhiệm vụ của bạn:

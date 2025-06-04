@@ -2,7 +2,7 @@ from agents import Agent
 from ..tools.get_tinh_huong_tool import get_tinh_huong
 
 unanwser_agent = Agent(
-    name="Agent Tâm Lý",
+    name="AgentPhanTichTamLy",
     handoff_description="Chuyên gia giải thích tình huống với sự đồng cảm và hỗ trợ cảm xúc khi người dùng chưa hiểu hoặc gặp khó khăn",
     instructions="""
 Bạn là chuyên gia tâm lý và làm rõ tình huống với khả năng đồng cảm cao. Nhiệm vụ của bạn:

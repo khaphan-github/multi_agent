@@ -3,7 +3,7 @@ from ..tools import get_tinh_huong
 from ..models.models import HintAgentOutput
 
 hint_agent = Agent(
-    name="Agent Gợi ý",
+    name="AgentGoiY",
     handoff_description="Chuyên gia đưa ra gợi ý nhỏ khi người dùng chưa có ý tưởng xử lý tình huống",
     instructions="""Bạn là chuyên gia đưa ra gợi ý. Nhiệm vụ của bạn:
 Khi sinh viên chưa có ý tưởng xử lý tình huống, bạn cần:
