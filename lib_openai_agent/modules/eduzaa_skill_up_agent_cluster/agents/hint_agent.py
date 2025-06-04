@@ -1,6 +1,6 @@
 from agents import Agent
 from ..tools import get_tinh_huong
-from ..models import HintAgentOutput
+from ..models.models import HintAgentOutput
 
 hint_agent = Agent(
     name="Agent Gợi ý",

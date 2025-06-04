@@ -11,5 +11,6 @@ Bạn là chuyên gia làm rõ tình huống. Nhiệm vụ của bạn:
 - Nội dung phải kết nối tự nhiên với mạch trò chuyện hiện tại
 - Giữ phong cách như 2 người đang trò chuyện thân thiện
 """,
-    tools=[get_tinh_huong,]
+    tools=[get_tinh_huong],
+    handoffs=[]
 )

@@ -1,7 +1,9 @@
 # TODO: Get thong tin nguoi dung , get thong tin info, lay tong tin kill
-from ..models import CustomContexModel
+from ..models.models import CustomContexModel
+
 
 def get_context(user_id: str = None, chat_id: str = None, skill_id: str = None) -> CustomContexModel:
+    # lấy thông tin ngữ cảnh
     return CustomContexModel(
         mo_ta='''
         Ứng phó với nhiệm vụ mới

@@ -1,5 +1,5 @@
 from agents import RunContextWrapper, function_tool
-from ..models import CustomContexModel
+from ..models.models import CustomContexModel
 
 
 @function_tool

@@ -1,0 +1,1 @@
+# Viet cac class tao instance neu co
