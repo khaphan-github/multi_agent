@@ -2,6 +2,10 @@
 __pycache__/
 *.py[cod]
 *$py.class
+**/__pycache__/
+*.pyc
+*.pyo
+*.pyd
 
 # C extensions
 *.so
@@ -40,6 +44,17 @@ coverage.xml
 *.cover
 .hypothesis/
 .pytest_cache/
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# pytype static type analyzer
+.pytype/
 
 # Virtual environments
 .env
