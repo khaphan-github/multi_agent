@@ -89,4 +89,4 @@ class ServiceManager:
             new_input = result.to_input_list()
             result = Runner.run_streamed(out_agent, new_input)
 
-            return StreamHandler(result).stream_events(_chat_id, self._save_final_response)
+            return StreamHandler(result).stream_events(_chat_id, call_back_final_response_fn=self._save_final_response)
