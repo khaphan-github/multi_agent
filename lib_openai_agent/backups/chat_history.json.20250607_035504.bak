@@ -1,0 +1,100 @@
+[
+  {
+    "record_type": "session",
+    "session_id": "session_20250607_035417_f613cc74",
+    "user_id": "user123",
+    "chat_id": "chat456",
+    "skill_id": "skill_001",
+    "status": "active",
+    "start_time": "2025-06-07T03:54:17.370558",
+    "total_turns": 0,
+    "skill_title": "Ứng phó với nhiệm vụ mới",
+    "id": "74531e7c-7319-4296-bbe5-05b7f4df9810",
+    "created_at": "2025-06-07T03:54:17.370632",
+    "updated_at": "2025-06-07T03:54:17.370634"
+  },
+  {
+    "session_id": "session_20250607_035417_f613cc74",
+    "user_id": "user123",
+    "chat_id": "chat456",
+    "skill_id": "skill_001",
+    "turn_number": 1,
+    "message_type": "user",
+    "content": "Cho 1 gợi ý nhỏ",
+    "created_at": "2025-06-07T03:54:17.370912",
+    "id": "e2676df5-ae92-47fb-a01a-103a3741646c",
+    "updated_at": "2025-06-07T03:54:17.370913"
+  },
+  {
+    "session_id": "session_20250607_035417_f613cc74",
+    "user_id": "user123",
+    "chat_id": "chat456",
+    "skill_id": "skill_001",
+    "turn_number": 1,
+    "message_type": "ai",
+    "content": "    {\"type_result\":\"hint\",\"response\":[\"Hãy cân nhắc sử dụng thời gian để tìm hiểu kỹ hơn về dự án trước khi đưa ra bất kỳ cam kết nào. Bạn có thể đề xuất cần thêm thời gian để xem xét kỹ lưỡng tài liệu và xác định rõ các yếu tố ảnh hưởng đến tiến độ dự án.\",\"Thử nghĩ đến việc hỏi ý kiến sếp về các yếu tố chính của dự án, như nguồn lực có sẵn, thời hạn mong muốn, và các rao cản tiềm năng trước khi đưa ra dự đoán sơ bộ.\"]}",
+    "created_at": "2025-06-07T03:54:31.918410",
+    "id": "ae2e99e1-7283-4174-bb72-34812acd351e",
+    "updated_at": "2025-06-07T03:54:31.918411"
+  },
+  {
+    "session_id": "session_20250607_035417_f613cc74",
+    "user_id": "user123",
+    "chat_id": "chat456",
+    "skill_id": "skill_001",
+    "turn_number": 2,
+    "message_type": "user",
+    "content": "Tôi chưa hiểu rõ nội dung tình huống",
+    "created_at": "2025-06-07T03:54:31.918822",
+    "id": "258ceec0-bf8a-47a5-b3cb-7cbf65290a6c",
+    "updated_at": "2025-06-07T03:54:31.918823"
+  },
+  {
+    "session_id": "session_20250607_035417_f613cc74",
+    "user_id": "user123",
+    "chat_id": "chat456",
+    "skill_id": "skill_001",
+    "turn_number": 2,
+    "message_type": "ai",
+    "content": "\n\n{\"type_result\":\"clarification\",\"response\":\"Tình huống này liên quan đến việc bạn vừa được giao một dự án mới trong công việc văn phòng, nhưng bạn chưa có kinh nghiệm nhiều về lĩnh vực này. \\n\\nSếp bất ngờ hỏi bạn dự đoán thời gian để hoàn thành dự án. Điều này đặt bạn vào tình thế khó khăn bởi bạn chỉ mới đọc qua tài liệu, chưa thật sự hiểu rõ về nguồn lực, khối lượng công việc hay thời hạn cụ thể.\\n\\nRõ ràng, bạn cần phải cân nhắc kỹ lưỡng trước khi đưa ra bất kỳ ước tính nào vì bạn đang ở giai đoạn đầu của việc nắm bắt thông tin.\"}",
+    "created_at": "2025-06-07T03:54:44.639784",
+    "id": "236b8630-b292-4c11-a53d-4bb5782b0e14",
+    "updated_at": "2025-06-07T03:54:44.639786"
+  },
+  {
+    "session_id": "session_20250607_035417_f613cc74",
+    "user_id": "user123",
+    "chat_id": "chat456",
+    "skill_id": "skill_001",
+    "turn_number": 3,
+    "message_type": "user",
+    "content": "Chịu, tôi không nghỉ ra được bất cứ điều gì",
+    "created_at": "2025-06-07T03:54:44.640233",
+    "id": "c0aaa89f-6a3d-4a28-8bf7-1afdfdd771ae",
+    "updated_at": "2025-06-07T03:54:44.640234"
+  },
+  {
+    "session_id": "session_20250607_035417_f613cc74",
+    "user_id": "user123",
+    "chat_id": "chat456",
+    "skill_id": "skill_001",
+    "turn_number": 3,
+    "message_type": "ai",
+    "content": "{\"type_result\":\"emotions\",\"response\":\"Mình hiểu cảm giác này có thể khiến bạn cảm thấy bất lực và áp lực. Đôi khi, chúng ta đều gặp phải những lúc đầu óc trống rỗng và không thể nghĩ ra điều gì. Điều này hết sức bình thường và bạn không hề cô đơn trong việc này đâu. Hãy nhớ rằng, nghỉ ngơi và thư giãn đôi khi là cách tốt nhất để khơi dậy sự sáng tạo. Bạn có muốn chia sẻ thêm về điều gì đang khiến bạn khó chịu không?\"}",
+    "created_at": "2025-06-07T03:54:50.130745",
+    "id": "194de527-da1a-4536-a085-fa57d92235a3",
+    "updated_at": "2025-06-07T03:54:50.130747"
+  },
+  {
+    "session_id": "session_20250607_035417_f613cc74",
+    "user_id": "user123",
+    "chat_id": "chat456",
+    "skill_id": "skill_001",
+    "turn_number": 4,
+    "message_type": "user",
+    "content": "\n    Xem xét kỹ hơn các tài liệu dự án;\n    Làm việc với các bên liên quan để nắm rõ yêu cầu và nguồn lực;\n    Xác định các yếu tố rủi ro có thể ảnh hưởng đến tiến độ.\n    Tôi dự kiến sẽ hoàn tất việc đánh giá sơ bộ trong vòng [1–2 ngày làm việc]\n    ",
+    "created_at": "2025-06-07T03:54:50.131248",
+    "id": "8be7e058-5555-44d5-83a2-e30b7fc961e6",
+    "updated_at": "2025-06-07T03:54:50.131250"
+  }
+]

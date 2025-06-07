@@ -1,0 +1,1 @@
+# Implemetn text empty to persist vector embedding to file

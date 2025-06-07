@@ -1,19 +1,71 @@
 # VIet service goi client
 # Service goi runnder.
 
-from modules.eduzaa_skill_up_agent_cluster.stream.stream_handler import StreamHandler
-from modules.eduzaa_skill_up_agent_cluster.contexts.context import get_context
-from modules.eduzaa_skill_up_agent_cluster.runner.main_agent_runner import run_skillup_conversation
+from agents import Runner, trace
+from .models.build_chat_id import build_chat_id
+from .models.build_workflow_name import build_workflow_name
+from .contexts.skill_up import SkillUpContextProvider
+from .contexts.user_info import UserInfoContextProvider
+from .models.models import CustomContexModel
+from .contexts.history import ChatHistoryProvider
+from .agents import generate_response_agent
+from .agents import triage_agent
+from .hooks.agent_run_hook import AgentRunHook
+from .stream.stream_handler import StreamHandler
 
 
 class ServiceManager:
-    def __init__(self):
+    def __init__(
+        self,
+        chat_history_provider=ChatHistoryProvider('./chat_history.json'),
+        # Addtional context provider.
+        skill_up_context_provider=SkillUpContextProvider(),
+
+        # User info context provider
+        # TODO: User info context provider.
+        user_info_context_provider=UserInfoContextProvider(),
+        # Eduzaa bla bla context provider.
+    ):
         """
         Khởi tạo ServiceManager.
         """
-        pass
+        self.chat_history_provider = chat_history_provider
+        self.skill_up_context_provider = skill_up_context_provider
+        self.user_info_context_provider = user_info_context_provider
 
-    async def run(self, user_id: str = None, chat_id: str = None, skill_id: str = None, messsage: str = None):
+    def get_context(self, user_id, chat_id, skill_id) -> CustomContexModel:
+        """
+        Lấy ngữ cảnh hiện tại.
+        :return: Ngữ cảnh hiện tại
+        """
+        message = self.chat_history_provider.read(user_id, chat_id)
+        # Lấy mô tả kỹ năng từ skill_id
+        skill_info = self.skill_up_context_provider.get_skill(skill_id)
+
+        user_info = self.user_info_context_provider.get_user_info(user_id)
+
+        return CustomContexModel(
+            mo_ta=skill_info['mo_ta'],
+            history=message,
+            user_info=user_info
+        )
+
+    def _save_final_response(self, **kwargs):
+        """
+        Lưu phản hồi cuối cùng vào cơ sở dữ liệu.
+        :param user_id: ID người dùng
+        :param chat_id: ID cuộc trò chuyện
+        :param response: Phản hồi cuối cùng
+        """
+        print("Saving final response to database...")
+        # print(kwargs)
+
+    def create_chat_id(self, chat_id) -> str:
+        if chat_id:
+            return chat_id
+        return build_chat_id()
+
+    async def run(self, user_id: str = None, chat_id: str = None, skill_id: str = None, messsage: str = None, agent=triage_agent, out_agent=generate_response_agent, ):
         """
         Chạy dịch vụ với các tham số đã cho.
         :param user_id: ID người dùng
@@ -21,9 +73,20 @@ class ServiceManager:
         :param skill_id: ID kỹ năng
         :return: Kết quả của dịch vụ
         """
-        context = get_context(user_id, chat_id, skill_id)
-        run = await run_skillup_conversation(
-            user_input=messsage,
-            context=context
-        )
-        return StreamHandler(run).stream_events()
+        _chat_id = self.create_chat_id(chat_id)
+        context = self.get_context(
+            user_id, _chat_id, skill_id)
+        workflow_name = build_workflow_name('SkillUp', user_id, _chat_id)
+
+        with trace(workflow_name):
+            result = await Runner.run(
+                starting_agent=agent,
+                input=messsage,
+                context=context,
+                hooks=AgentRunHook()
+            )
+            # Pass result to generate_response_agent
+            new_input = result.to_input_list()
+            result = Runner.run_streamed(out_agent, new_input)
+
+            return StreamHandler(result).stream_events(_chat_id, self._save_final_response)

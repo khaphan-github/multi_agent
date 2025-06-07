@@ -1,0 +1,62 @@
+[
+  {
+    "session_id": "session_20250607_034818_c9f5c21d",
+    "user_id": "user123",
+    "chat_id": "chat456",
+    "skill_id": "skill_001",
+    "turn_number": 1,
+    "message_type": "ai",
+    "content": "{\"type_result\":\"hint\",\"response\":[\"- **Yêu cầu thêm thông tin** để nắm rõ dự án hơn.\\n\\n- **Giao tiếp khéo léo** để xin thêm thời gian chuẩn bị.\"]}",
+    "created_at": "2025-06-07T03:48:24.340083",
+    "id": "c6c7ba8a-0093-40f1-9186-fd545680f583",
+    "updated_at": "2025-06-07T03:48:24.340084"
+  },
+  {
+    "session_id": "session_20250607_034818_c9f5c21d",
+    "user_id": "user123",
+    "chat_id": "chat456",
+    "skill_id": "skill_001",
+    "turn_number": 2,
+    "message_type": "user",
+    "content": "Tôi chưa hiểu rõ nội dung tình huống",
+    "created_at": "2025-06-07T03:48:24.340411",
+    "id": "a631997f-26b5-421b-b59f-8c8d643a1e62",
+    "updated_at": "2025-06-07T03:48:24.340412"
+  },
+  {
+    "session_id": "session_20250607_034818_c9f5c21d",
+    "user_id": "user123",
+    "chat_id": "chat456",
+    "skill_id": "skill_001",
+    "turn_number": 2,
+    "message_type": "ai",
+    "content": "\n\n{\"type_result\":\"clarification\",\"response\":\"Đây là tình huống mà bạn là một nhân viên văn phòng vừa được giao phụ trách một dự án mới, mặc dù chưa có nhiều kinh nghiệm trong lĩnh vực đó. Ngay lập tức, sếp của bạn hỏi bạn nghĩ mất bao lâu để hoàn thành dự án, trong khi bạn chỉ mới đọc sơ qua tài liệu và chưa thực sự hiểu rõ về nguồn lực, khối lượng công việc hay thời hạn cần thiết để hoàn thành. \\n\\nTình huống này thường xảy ra khi có một sự mong đợi hoặc áp lực nào đó từ cấp trên mà bạn chưa thực sự sẵn sàng để đáp ứng do thiếu thông tin. Điều này có thể khiến bạn cảm thấy bối rối hoặc lo lắng về việc đưa ra câu trả lời chưa chắc chắn.\"}",
+    "created_at": "2025-06-07T03:48:33.434785",
+    "id": "29a125cd-e8eb-4a49-9289-32a4a7b10bc8",
+    "updated_at": "2025-06-07T03:48:33.434786"
+  },
+  {
+    "session_id": "session_20250607_034818_c9f5c21d",
+    "user_id": "user123",
+    "chat_id": "chat456",
+    "skill_id": "skill_001",
+    "turn_number": 3,
+    "message_type": "user",
+    "content": "Chịu, tôi không nghỉ ra được bất cứ điều gì",
+    "created_at": "2025-06-07T03:48:33.435141",
+    "id": "e69fd955-fa5a-413a-a77e-7bdfc79a30ae",
+    "updated_at": "2025-06-07T03:48:33.435142"
+  },
+  {
+    "session_id": "session_20250607_034818_c9f5c21d",
+    "user_id": "user123",
+    "chat_id": "chat456",
+    "skill_id": "skill_001",
+    "turn_number": 3,
+    "message_type": "ai",
+    "content": "\n\n{\"type_result\":\"emotions\",\"response\":\"Tình huống này thật sự có thể gây áp lực và căng thẳng cho bất kỳ ai. Bạn đang đối mặt với cảm giác chưa sẵn sàng và không tự tin vì thiếu kinh nghiệm. Điều này là hoàn toàn bình thường.\\n\\nMình hiểu cảm giác của bạn khi phải đảm nhận một nhiệm vụ mới mà chưa có đủ thông tin. Điều quan trọng là bạn không cô đơn - rất nhiều người khác cũng từng trải qua cảm giác này khi đối mặt với thử thách mới.\\n\\nHãy thử nhìn nhận tình huống này như một cơ hội để học hỏi và phát triển kỹ năng. Bạn có thể cân nhắc việc thảo luận thêm với sếp về chi tiết dự án và nguồn lực cần thiết để có được cái nhìn rõ ràng hơn. Điều này cũng cho bạn cơ hội thể hiện sự ham học hỏi và ý chí sẵn sàng đối diện với thử thách.\\n\\nHãy nhớ rằng mỗi bước đi đều là một bước tiến đến sự thành công!\"}",
+    "created_at": "2025-06-07T03:48:41.406607",
+    "id": "ef84ea67-2f54-4eb9-a4d3-e13de698886d",
+    "updated_at": "2025-06-07T03:48:41.406608"
+  }
+]

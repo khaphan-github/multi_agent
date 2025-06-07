@@ -1,7 +1,3 @@
-# TODO: Get thong tin nguoi dung , get thong tin info, lay tong tin kill
-from ..models.models import CustomContexModel
-
-# Skill mapping dictionary
 SKILL_MAP = {
     "skill_001": {
         "mo_ta": '''
@@ -32,15 +28,20 @@ SKILL_MAP = {
 }
 
 
-def get_context(user_id: str = None, chat_id: str = None, skill_id: str = None) -> CustomContexModel:
-    # lấy thông tin ngữ cảnh
-    # Default to skill_001 if skill_id not found
-    skill_info = SKILL_MAP.get(skill_id, SKILL_MAP["skill_001"])
+class SkillUpContextProvider:
+    """
+    Context provider for the Skill Up Agent Cluster.
+    This class is responsible for providing context to the Skill Up Agent Cluster.
+    """
 
-    return CustomContexModel(
-        mo_ta=skill_info["mo_ta"],
-        history=[
-            {"role": "user", "content": "Tôi tên gì?"},
-            {"role": "assistant", "content": "Bạn tên là Nguyễn Văn A."},
-        ]
-    )
+    def __init__(self,):
+        """
+        Initializes the Skill Up Context Provider.
+        """
+        pass
+
+    def get_skill(self, skill_id: str = None) -> dict:
+        """
+        Returns the context for the Skill Up Agent Cluster.
+        """
+        return SKILL_MAP.get(skill_id, SKILL_MAP["skill_001"])

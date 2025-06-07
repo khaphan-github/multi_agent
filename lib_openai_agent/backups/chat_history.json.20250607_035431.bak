@@ -1,0 +1,40 @@
+[
+  {
+    "record_type": "session",
+    "session_id": "session_20250607_035417_f613cc74",
+    "user_id": "user123",
+    "chat_id": "chat456",
+    "skill_id": "skill_001",
+    "status": "active",
+    "start_time": "2025-06-07T03:54:17.370558",
+    "total_turns": 0,
+    "skill_title": "Ứng phó với nhiệm vụ mới",
+    "id": "74531e7c-7319-4296-bbe5-05b7f4df9810",
+    "created_at": "2025-06-07T03:54:17.370632",
+    "updated_at": "2025-06-07T03:54:17.370634"
+  },
+  {
+    "session_id": "session_20250607_035417_f613cc74",
+    "user_id": "user123",
+    "chat_id": "chat456",
+    "skill_id": "skill_001",
+    "turn_number": 1,
+    "message_type": "user",
+    "content": "Cho 1 gợi ý nhỏ",
+    "created_at": "2025-06-07T03:54:17.370912",
+    "id": "e2676df5-ae92-47fb-a01a-103a3741646c",
+    "updated_at": "2025-06-07T03:54:17.370913"
+  },
+  {
+    "session_id": "session_20250607_035417_f613cc74",
+    "user_id": "user123",
+    "chat_id": "chat456",
+    "skill_id": "skill_001",
+    "turn_number": 1,
+    "message_type": "ai",
+    "content": "    {\"type_result\":\"hint\",\"response\":[\"Hãy cân nhắc sử dụng thời gian để tìm hiểu kỹ hơn về dự án trước khi đưa ra bất kỳ cam kết nào. Bạn có thể đề xuất cần thêm thời gian để xem xét kỹ lưỡng tài liệu và xác định rõ các yếu tố ảnh hưởng đến tiến độ dự án.\",\"Thử nghĩ đến việc hỏi ý kiến sếp về các yếu tố chính của dự án, như nguồn lực có sẵn, thời hạn mong muốn, và các rao cản tiềm năng trước khi đưa ra dự đoán sơ bộ.\"]}",
+    "created_at": "2025-06-07T03:54:31.918410",
+    "id": "ae2e99e1-7283-4174-bb72-34812acd351e",
+    "updated_at": "2025-06-07T03:54:31.918411"
+  }
+]

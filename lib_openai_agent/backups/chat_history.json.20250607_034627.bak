@@ -1,0 +1,60 @@
+[
+  {
+    "session_id": "session_20250607_034555_fec83906",
+    "user_id": "user123",
+    "chat_id": "chat456",
+    "skill_id": "skill_001",
+    "status": "active",
+    "start_time": "2025-06-07T03:45:55.602340",
+    "total_turns": 0,
+    "skill_title": "Ứng phó với nhiệm vụ mới",
+    "id": "7373d06e-c9fd-45bd-bada-969b6751bf75",
+    "created_at": "2025-06-07T03:45:55.602410",
+    "updated_at": "2025-06-07T03:45:55.602412"
+  },
+  {
+    "session_id": "session_20250607_034555_fec83906",
+    "user_id": "user123",
+    "chat_id": "chat456",
+    "skill_id": "skill_001",
+    "turn_number": 1,
+    "user_input": "Cho 1 gợi ý nhỏ",
+    "agent_response": "\n\n{\"type_result\":\"hint\",\"response\":[\"Xem xét tình huống từ góc nhìn của người không quen thuộc với nhiệm vụ và suy nghĩ về các câu hỏi cần đặt ra để nắm thông tin rõ hơn.\",\"Nghĩ về cách giao tiếp hiệu quả với sếp để có thể xác định các bước tiếp theo của dự án một cách rõ ràng.\"]}",
+    "timestamp": "2025-06-07T03:46:01.343505",
+    "date": "2025-06-07",
+    "time": "03:46:01",
+    "id": "63d7eaf8-a38a-4b50-ac8d-e3141986cf30",
+    "created_at": "2025-06-07T03:46:01.343574",
+    "updated_at": "2025-06-07T03:46:01.343576"
+  },
+  {
+    "session_id": "session_20250607_034555_fec83906",
+    "user_id": "user123",
+    "chat_id": "chat456",
+    "skill_id": "skill_001",
+    "turn_number": 2,
+    "user_input": "Tôi chưa hiểu rõ nội dung tình huống",
+    "agent_response": "\n\n{\"type_result\":\"clarification\",\"response\":\"Sếp hỏi thời gian hoàn thành dự án, nhưng bạn mới đọc tài liệu và chưa rõ các yếu tố cần thiết. Làm thế nào để phản hồi khéo léo?\"}",
+    "timestamp": "2025-06-07T03:46:08.520344",
+    "date": "2025-06-07",
+    "time": "03:46:08",
+    "id": "4c79567a-65bf-4d37-937b-6116152ff726",
+    "created_at": "2025-06-07T03:46:08.520416",
+    "updated_at": "2025-06-07T03:46:08.520417"
+  },
+  {
+    "session_id": "session_20250607_034555_fec83906",
+    "user_id": "user123",
+    "chat_id": "chat456",
+    "skill_id": "skill_001",
+    "turn_number": 3,
+    "user_input": "Chịu, tôi không nghỉ ra được bất cứ điều gì",
+    "agent_response": "{\"type_result\":\"emotions\",\"response\":\"Mình hiểu cảm giác của bạn khi cảm thấy bế tắc như vậy. Đôi khi tâm trí chúng ta cần một chút thời gian để sắp xếp lại mọi thứ. Điều này thật sự có thể gây thất vọng, nhưng hãy nhớ rằng bạn không cô đơn trong việc này. Đôi lúc chỉ cần một chút thời gian lắng đọng và tự thả lỏng bản thân, mọi thứ sẽ trở nên rõ ràng hơn. Hãy kiên nhẫn với chính mình nhé!\"}",
+    "timestamp": "2025-06-07T03:46:13.892245",
+    "date": "2025-06-07",
+    "time": "03:46:13",
+    "id": "a132a8d3-df34-4dc4-80d8-daa4f43ee658",
+    "created_at": "2025-06-07T03:46:13.892320",
+    "updated_at": "2025-06-07T03:46:13.892322"
+  }
+]

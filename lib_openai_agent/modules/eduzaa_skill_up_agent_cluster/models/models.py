@@ -1,6 +1,6 @@
 
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import Any, List, Optional
 from pydantic import BaseModel, Field
 
 
@@ -12,6 +12,10 @@ class CustomContexModel:
         description="Lịch sử trò chuyện của người dùng, bao gồm các câu hỏi và phản hồi trước đó",
     )
     # Thong tin nguoi dung
+    user_info: Optional[Any] = Field(
+        default=None,
+        description="Thông tin người dùng, có thể là một đối tượng chứa thông tin cá nhân hoặc các thuộc tính khác",
+    )
 
 
 class UserMetadata(BaseModel):
