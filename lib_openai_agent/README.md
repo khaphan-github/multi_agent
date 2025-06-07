@@ -29,7 +29,7 @@
 - [x] Agent dieu phoi
 - [x] Agent tong hop
 - [ ] Them lich xu vao json - de load lai.
-- [ ] Agent hook la cai quai gi
+- [x] Agent hook la cai quai gi
 - [ ] Build vector databse chromadb persistent (same same rag - create embedded)
 - [ ] Lay tong tin trace de luu local
 
