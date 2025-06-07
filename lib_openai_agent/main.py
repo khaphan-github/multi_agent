@@ -10,7 +10,7 @@ from modules.eduzaa_skill_up_agent_cluster.contexts.context import get_context, 
 # https://openai.github.io/openai-agents-python/tools/
 
 # When error:
-# export OPENAI_API_KEY=
+# export OPENAI_API_KEY=<your_api_key>
 
 # Predefined test inputs for automatic testing
 KICH_BAN_CHAY = [
