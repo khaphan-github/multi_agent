@@ -10,9 +10,13 @@ class StreamHandler:
     async def stream_events(self, chat_id: str, call_back_stream_event_fn=None, call_back_final_response_fn=None):
         '''
             Truong hop call back co the async.
+            call_back_stream_event_fn: nhant ung event
+            call_back_final_response_fn: nhan ung phan hoi cuoi cung    
         '''
 
-        final_response_event = []
+        final_response_event = None
+        if call_back_final_response_fn:
+            final_response_event = []
 
         async for event in self.result.stream_events():
             if call_back_final_response_fn:
