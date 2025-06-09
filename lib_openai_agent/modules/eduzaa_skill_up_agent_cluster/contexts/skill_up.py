@@ -1,5 +1,5 @@
 SKILL_MAP = {
-    "skill_001": {
+    "1": {
         "mo_ta": '''
         Ứng phó với nhiệm vụ mới
         Giả sử giờ bạn sẽ là một nhân viên văn phòng vừa được giao phụ trách một dự án mới – dù bạn chưa có nhiều kinh nghiệm ở mảng này.
@@ -9,7 +9,7 @@ SKILL_MAP = {
         🧠 Vậy, trong trường hợp này bạn sẽ làm thế nào?
         '''
     },
-    "skill_002": {
+    "2": {
         "mo_ta": '''
         Kỹ năng giao tiếp hiệu quả
         Bạn đang tham gia một cuộc họp quan trọng với khách hàng. Đột nhiên khách hàng đặt câu hỏi về một vấn đề kỹ thuật mà bạn chưa nắm rõ.
@@ -17,7 +17,7 @@ SKILL_MAP = {
         🧠 Bạn sẽ xử lý tình huống này như thế nào?
         '''
     },
-    "skill_003": {
+    "3": {
         "mo_ta": '''
         Quản lý thời gian và ưu tiên công việc
         Bạn có 5 nhiệm vụ cần hoàn thành trong tuần này, nhưng tất cả đều có deadline gấp.
@@ -44,4 +44,5 @@ class SkillUpContextProvider:
         """
         Returns the context for the Skill Up Agent Cluster.
         """
-        return SKILL_MAP.get(skill_id, SKILL_MAP["skill_001"])
+        print(f"Skill ID: {skill_id}")
+        return SKILL_MAP.get(skill_id, SKILL_MAP["1"])

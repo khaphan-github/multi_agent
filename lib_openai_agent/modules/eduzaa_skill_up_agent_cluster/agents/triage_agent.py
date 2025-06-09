@@ -9,6 +9,7 @@ from agents.extensions.handoff_prompt import RECOMMENDED_PROMPT_PREFIX
 triage_agent = Agent(
     name="Agent Phân loại",
     # model="gpt-4.1",
+    model="gpt-4o-mini",
     instructions="""
     {RECOMMENDED_PROMPT_PREFIX}
 Bạn là Agent điều phối chịu trách nhiệm phân tích và chuyển tiếp người dùng đến agent phù hợp.

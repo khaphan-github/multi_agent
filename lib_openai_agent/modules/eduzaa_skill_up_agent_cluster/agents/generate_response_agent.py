@@ -3,6 +3,7 @@ from ..models.models import GenerateResponseAgentOutput
 
 generate_response_agent = Agent(
     name="Agent Tạo phản hồi",
+    model="gpt-4o-mini",
     instructions="""
 Dieu kien re nhanh:
 - Truong hop Ket qua tra ve cuoi cung tu Agent Tâm Lý: 

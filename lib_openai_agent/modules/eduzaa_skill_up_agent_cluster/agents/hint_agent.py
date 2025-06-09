@@ -4,6 +4,7 @@ from ..models.models import HintAgentOutput
 
 hint_agent = Agent(
     name="AgentGoiY",
+    model="gpt-4o-mini",
     handoff_description="Chuyên gia đưa ra gợi ý nhỏ khi người dùng chưa có ý tưởng xử lý tình huống",
     instructions="""Bạn là chuyên gia đưa ra gợi ý. Nhiệm vụ của bạn:
 Khi sinh viên chưa có ý tưởng xử lý tình huống, bạn cần:

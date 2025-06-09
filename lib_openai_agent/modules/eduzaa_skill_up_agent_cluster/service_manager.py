@@ -12,6 +12,9 @@ from .agents import generate_response_agent
 from .agents import triage_agent
 from .hooks.agent_run_hook import AgentRunHook
 from .stream.stream_handler import StreamHandler
+# Format stream hanlder
+from agents import RawResponsesStreamEvent, RunResultStreaming
+from openai.types.responses import ResponseTextDeltaEvent
 
 
 class ServiceManager:
@@ -50,6 +53,14 @@ class ServiceManager:
             user_info=user_info
         )
 
+    def create_or_get_chat_id(self, chat_id) -> str:
+        '''
+            Create unique chat_id.
+        '''
+        if chat_id:
+            return chat_id
+        return build_chat_id()
+
     def _save_final_response(self, **kwargs):
         """
         Lưu phản hồi cuối cùng vào cơ sở dữ liệu.
@@ -57,13 +68,29 @@ class ServiceManager:
         :param chat_id: ID cuộc trò chuyện
         :param response: Phản hồi cuối cùng
         """
-        print("Saving final response to database...")
-        # print(kwargs)
+        content = ''
 
-    def create_chat_id(self, chat_id) -> str:
-        if chat_id:
-            return chat_id
-        return build_chat_id()
+        for event in kwargs.get('events', []):
+            if event.type == "raw_response_event" and isinstance(event.data, ResponseTextDeltaEvent):
+                delta = event.data.delta
+                content += delta
+
+        self.chat_history_provider.create({
+            'metadata': kwargs.get('metadata', {}),
+            'chat_id': kwargs.get('chat_id', None),
+            'content': content,
+            'role': 'assistant'
+        }, False)
+
+    def save_user_message(self, user_id: str, chat_id: str, skill_id: str, message: str):
+        """
+        """
+        self.chat_history_provider.create({
+            'metadata': {'user_id': user_id, 'chat_id': chat_id, 'skill_id': skill_id},
+            'chat_id': chat_id,
+            'content': message,
+            'role': 'user'
+        }, False)
 
     async def run(self, user_id: str = None, chat_id: str = None, skill_id: str = None, messsage: str = None, agent=triage_agent, out_agent=generate_response_agent, ):
         """
@@ -73,20 +100,42 @@ class ServiceManager:
         :param skill_id: ID kỹ năng
         :return: Kết quả của dịch vụ
         """
-        _chat_id = self.create_chat_id(chat_id)
+        _chat_id = self.create_or_get_chat_id(chat_id)
+
+        self.save_user_message(
+            user_id=user_id,
+            chat_id=_chat_id,
+            skill_id=skill_id,
+            message=messsage
+        )
+
         context = self.get_context(
             user_id, _chat_id, skill_id)
+
         workflow_name = build_workflow_name('SkillUp', user_id, _chat_id)
 
         with trace(workflow_name):
-            result = await Runner.run(
-                starting_agent=agent,
-                input=messsage,
-                context=context,
-                hooks=AgentRunHook()
-            )
-            # Pass result to generate_response_agent
-            new_input = result.to_input_list()
-            result = Runner.run_streamed(out_agent, new_input)
+            try:
 
-            return StreamHandler(result).stream_events(_chat_id, call_back_final_response_fn=self._save_final_response)
+                result = await Runner.run(
+                    starting_agent=agent,
+                    input=messsage,
+                    context=context,
+                    hooks=AgentRunHook()
+                )
+                # Pass result to generate_response_agent
+                new_input = result.to_input_list()
+                result = Runner.run_streamed(out_agent, new_input)
+
+                return StreamHandler(result).stream_events(
+                    chat_id=_chat_id,
+                    call_back_final_response_fn=self._save_final_response,
+                    metadata={
+                        'user_id': user_id,
+                        'chat_id': _chat_id,
+                        'skill_id': skill_id
+                    }
+                )
+            except Exception as e:
+                print(f"Error during agent run: {e}")
+                StreamHandler().stream_error_events(chat_id=_chat_id)
