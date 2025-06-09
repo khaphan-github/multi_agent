@@ -17,5 +17,4 @@ clarification_agent = Agent(
     instructions=instructions,
     tools=[get_tinh_huong],
     handoffs=[],
-    model="gpt-4o-mini"
 )

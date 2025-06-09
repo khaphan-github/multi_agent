@@ -14,7 +14,6 @@ Bạn là chuyên gia tâm lý và làm rõ tình huống với khả năng đ�
 
 unanwser_agent = Agent(
     name="AgentPhanTichTamLy",
-    # model="gpt-4o-mini",
     handoff_description="Chuyên gia tư vấn tâm lý. tạo sự đồng cảm và hỗ trợ cảm xúc khi người dùng chưa hiểu hoặc gặp khó khăn",
     instructions=instructions,
     tools=[get_tinh_huong],

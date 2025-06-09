@@ -11,7 +11,8 @@ load_dotenv()
 
 class Env:
     # General environment variables with sensible defaults
-    ADMISSION_OPEN_AI_API_KEY: str = os.getenv("ADMISSION_OPEN_AI_API_KEY")
+    OPEN_API_KEY: str = os.getenv(
+        "OPEN_API_KEY")
 
     @classmethod
     def validate(cls):
@@ -20,17 +21,17 @@ class Env:
         Raises an EnvironmentError if any required variables are missing.
         """
         required_vars = [
-            "ADMISSION_OPEN_AI_API_KEY",
+            "OPEN_API_KEY",
         ]
         missing_vars = [var for var in required_vars if not getattr(cls, var)]
         if missing_vars:
             raise EnvironmentError(
-                f"ADMISSION_AI_CHATBOT_MODULE: Missing required environment variables: {', '.join(missing_vars)}"
+                f"OPEN_API_KEY: Missing required environment variables: {', '.join(missing_vars)}"
             )
 
         # Validate numeric values are actually integers
         integer_vars = [
-            ("IOREDIS_CHAT_HISTORY_PORT", "IOREDIS_CHAT_HISTORY_PORT"),
+            ("OPEN_API_KEY", "OPEN_API_KEY"),
         ]
 
         for attr_name, env_name in integer_vars:
@@ -41,17 +42,12 @@ class Env:
                 except ValueError:
                     raise EnvironmentError(
                         f"Invalid value for {env_name}: expected integer, got {value}")
-
-        # Validate retrieval action value is either ON or OFF
-        if cls.RETRIEVAL_BASED_ACTION not in ["ON", "OFF"]:
-            raise EnvironmentError(
-                f"RETRIEVAL_BASED_ACTION must be ON or OFF, got: {cls.RETRIEVAL_BASED_ACTION}")
-
         return True
 
     def __repr__(self):
         """String representation of the environment configuration"""
-        return f"AdmissionAIChatbotEnv(ADMISSION_ASSISTANT_ID={self.ADMISSION_ASSISTANT_ID})"
+        return f"AdmissionAIChatbotEnv(OPEN_API_KEY={self.ADMISSION_ASSISTANT_ID})"
+
 
 # Create a singleton instance for easy import
 env = Env()

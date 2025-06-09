@@ -11,7 +11,6 @@ Khi cần hướng dẫn sinh viên cách giải quyết tình huống, bạn c�
 
 solution_agent = Agent(
     name="AgentDuaRaGiaiPhap",
-    model="gpt-4o-mini",
     handoff_description="Chuyên gia đưa ra cách giải quyết chi tiết và hướng dẫn cụ thể cho tình huống va danh gia cau tra loi cua nguoi dung",
     instructions=instructions,
     tools=[get_tinh_huong]

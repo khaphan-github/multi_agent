@@ -41,13 +41,13 @@ class ServiceManager:
         Lấy ngữ cảnh hiện tại.
         :return: Ngữ cảnh hiện tại
         """
-        message = self.chat_history_provider.read(user_id, chat_id)
+        message = list(
+            map(str, self.chat_history_provider.read(user_id, chat_id)))
         # Lấy mô tả kỹ năng từ skill_id
         skill_info = self.skill_up_context_provider.get_skill(skill_id)
 
         user_info = self.user_info_context_provider.get_user_info(user_id)
 
-        print(f"User info: {skill_info['mo_ta']}")
         return CustomContexModel(
             mo_ta=skill_info['mo_ta'],
             history=message,
@@ -140,4 +140,4 @@ class ServiceManager:
                 )
             except Exception as e:
                 print(f"Error during agent run: {e}")
-                StreamHandler().stream_error_events(chat_id=_chat_id)
+                StreamHandler.stream_error_events(chat_id=_chat_id)

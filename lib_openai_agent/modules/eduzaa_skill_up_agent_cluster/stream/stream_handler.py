@@ -4,9 +4,10 @@ from openai.types.responses import ResponseTextDeltaEvent
 
 
 class StreamHandler:
-    def __init__(self, result: RunResultStreaming):
+    def __init__(self, result: RunResultStreaming | None):
         self.result = result
 
+    @staticmethod
     def stream_error_events(self, chat_id: str, call_back_stream_event_fn=None, call_back_final_response_fn=None, metadata=None):
         yield {"chat_id": chat_id, "isError": True, "error": "An error occurred while processing the stream."}
 
@@ -43,7 +44,7 @@ class StreamHandler:
             else:
                 call_back_final_response_fn(
                     chat_id=chat_id, events=final_response_event, metadata=metadata)
-                
-        yield { "chat_id": chat_id }
-        
+
+        yield {"chat_id": chat_id}
+
         yield '[DONE]'

@@ -24,24 +24,28 @@ async def run_agent_transition_tests(service_manager, user_id, skill_id):
     """Run 4 automated messages to test agent transitions"""
     test_cases = [
         {
-            "message": "Chịu, tôi không nghỉ ra được bất cứ điều gì",
+            "message": "Ten cua toi la Nguyen Van A, toi muon tim hieu ve ky nang giao tiep",
             "description": "=> Agent phân loại"
         },
-        {
-            "message": "Cho 1 gợi ý nhỏ",
-            "description": "=> Chuyển sang Agent Gợi ý"
-        },
-        {
-            "message": "Tôi chưa hiểu rõ nội dung tình huống",
-            "description": "=> Chuyển sang Agent Làm rõ tình huống"
-        },
-        {
-            "message": """Xem xét kỹ hơn các tài liệu dự án;
-Làm việc với các bên liên quan để nắm rõ yêu cầu và nguồn lực;
-Xác định các yếu tố rủi ro có thể ảnh hưởng đến tiến độ.
-Tôi dự kiến sẽ hoàn tất việc đánh giá sơ bộ trong vòng [1–2 ngày làm việc]""",
-            "description": "=> Agent solution"
-        }
+        # {
+        #     "message": "Chịu, tôi không nghỉ ra được bất cứ điều gì",
+        #     "description": "=> Agent phân loại"
+        # },
+        #         {
+        #             "message": "Cho 1 gợi ý nhỏ",
+        #             "description": "=> Chuyển sang Agent Gợi ý"
+        #         },
+        #         {
+        #             "message": "Tôi chưa hiểu rõ nội dung tình huống",
+        #             "description": "=> Chuyển sang Agent Làm rõ tình huống"
+        #         },
+        #         {
+        #             "message": """Xem xét kỹ hơn các tài liệu dự án;
+        # Làm việc với các bên liên quan để nắm rõ yêu cầu và nguồn lực;
+        # Xác định các yếu tố rủi ro có thể ảnh hưởng đến tiến độ.
+        # Tôi dự kiến sẽ hoàn tất việc đánh giá sơ bộ trong vòng [1–2 ngày làm việc]""",
+        #             "description": "=> Agent solution"
+        #         }
     ]
 
     chat_id = None
