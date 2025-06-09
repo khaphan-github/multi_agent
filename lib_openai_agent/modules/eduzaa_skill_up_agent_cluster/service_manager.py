@@ -47,6 +47,7 @@ class ServiceManager:
 
         user_info = self.user_info_context_provider.get_user_info(user_id)
 
+        print(f"User info: {skill_info['mo_ta']}")
         return CustomContexModel(
             mo_ta=skill_info['mo_ta'],
             history=message,
@@ -86,7 +87,7 @@ class ServiceManager:
         """
         """
         self.chat_history_provider.create({
-            'metadata': {'user_id': user_id, 'chat_id': chat_id, 'skill_id': skill_id},
+            'metadata': {'user_id': user_id, 'skill_id': skill_id},
             'chat_id': chat_id,
             'content': message,
             'role': 'user'
@@ -116,23 +117,24 @@ class ServiceManager:
 
         with trace(workflow_name):
             try:
-
                 result = await Runner.run(
                     starting_agent=agent,
                     input=messsage,
                     context=context,
                     hooks=AgentRunHook()
                 )
+
                 # Pass result to generate_response_agent
                 new_input = result.to_input_list()
-                result = Runner.run_streamed(out_agent, new_input)
+                result = Runner.run_streamed(
+                    out_agent, new_input
+                )
 
                 return StreamHandler(result).stream_events(
                     chat_id=_chat_id,
                     call_back_final_response_fn=self._save_final_response,
                     metadata={
                         'user_id': user_id,
-                        'chat_id': _chat_id,
                         'skill_id': skill_id
                     }
                 )

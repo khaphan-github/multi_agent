@@ -70,12 +70,6 @@ Tôi dự kiến sẽ hoàn tất việc đánh giá sơ bộ trong vòng [1–2
                 chat_id = service_manager.create_chat_id(None)
                 print(f"\n🔗 Generated chat_id: {chat_id}")
 
-            # Log the response details
-            print(f"\n📝 Response Summary:")
-            print(f"Content Length: {len(response_content)} characters")
-            print(
-                f"Response Preview: {response_content[:150]}{'...' if len(response_content) > 150 else ''}")
-
         except Exception as e:
             print(f"\n❌ Error in test {i}: {e}")
 

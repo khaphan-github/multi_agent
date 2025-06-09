@@ -1,10 +1,9 @@
 from agents import Agent
 from ..models.models import GenerateResponseAgentOutput
 
-generate_response_agent = Agent(
-    name="Agent Tạo phản hồi",
-    model="gpt-4o-mini",
-    instructions="""
+from agents.extensions.handoff_prompt import prompt_with_handoff_instructions
+
+instructions = prompt_with_handoff_instructions('''
 Dieu kien re nhanh:
 - Truong hop Ket qua tra ve cuoi cung tu Agent Tâm Lý: 
   => trả về kết quả của nó, không cần tạo lại câu trả lời.
@@ -22,6 +21,10 @@ Bạn là Agent tạo phản hồi. Nhiệm vụ của bạn:
 - Sử dụng nhiều style trình bày khác nhau (số thứ tự, bullet points, highlight) để dễ đọc.
 - Nội dung kết nối tự nhiên với mạch trò chuyện hiện tại.
 - Giữ phong cách như 2 người đang trò chuyện thân thiện.
-""",
+''')
+
+generate_response_agent = Agent(
+    name="Agent Tạo phản hồi",
+    instructions=instructions,
     output_type=GenerateResponseAgentOutput
 )
