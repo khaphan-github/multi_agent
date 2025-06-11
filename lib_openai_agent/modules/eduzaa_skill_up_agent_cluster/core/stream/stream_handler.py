@@ -1,6 +1,36 @@
 # Format stream hanlder
+from dataclasses import dataclass
+import json
 from agents import RawResponsesStreamEvent, RunResultStreaming
 from openai.types.responses import ResponseTextDeltaEvent
+import uuid
+
+
+@dataclass
+class StreamObject():
+    def __init__(self, chat_id: str, content: str = '', is_error: bool = False, is_last: bool = False, error: str = None):
+        self.id = str(uuid.uuid4())
+        self.chat_id = chat_id
+        self.is_error = is_error
+        self.content = content
+        self.is_last = is_last
+        self.error = error
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "chat_id": self.chat_id,
+            "content": self.content,
+            "isError": self.is_error,
+            "isLast": self.is_last,
+            "errorMsg": self.error if self.error else None
+        }
+
+    def to_string(self):
+        '''
+            Chuyển đổi đối tượng thành chuỗi JSON.
+        '''
+        return json.dumps(self.to_dict())
 
 
 class StreamHandler:
@@ -8,8 +38,13 @@ class StreamHandler:
         self.result = result
 
     @staticmethod
-    def stream_error_events(chat_id: str, call_back_stream_event_fn=None, call_back_final_response_fn=None, metadata=None):
-        yield {"chat_id": chat_id, "isError": True, "error": "An error occurred while processing the stream."}
+    def stream_error_events(chat_id: str, error_msg: str = None, metadata=None):
+        '''
+            Stream error events.
+            chat_id: ID của cuộc trò chuyện.
+            error_msg: Thông báo lỗi.
+        '''
+        yield StreamObject(chat_id=chat_id, error=error_msg, is_error=True, is_last=True).to_dict()
 
     async def stream_events(self, chat_id: str, call_back_stream_event_fn=None, call_back_final_response_fn=None, metadata=None):
         '''
@@ -35,8 +70,9 @@ class StreamHandler:
                             event=event, chat_id=chat_id, metadata=metadata)
 
             if event.type == "raw_response_event" and isinstance(event.data, ResponseTextDeltaEvent):
+                # TODO: Change stream object to dict
                 delta = event.data.delta
-                yield delta
+                yield StreamObject(chat_id=chat_id, content=delta).to_string()
 
         if call_back_final_response_fn:
             if hasattr(call_back_final_response_fn, "__call__") and hasattr(call_back_final_response_fn, "__await__"):
@@ -45,4 +81,4 @@ class StreamHandler:
                 call_back_final_response_fn(
                     chat_id=chat_id, events=final_response_event, metadata=metadata)
 
-        yield {'chat_id': chat_id, 'isLast': True}
+        yield StreamObject(chat_id=chat_id, is_last=True).to_string()

@@ -2,20 +2,19 @@
 # Service goi runnder.
 
 from agents import Runner, trace
-from .models.build_chat_id import build_chat_id
-from .models.build_workflow_name import build_workflow_name
+from .core.models.build_chat_id import build_chat_id
+from .core.models.build_workflow_name import build_workflow_name
 from .contexts.skill_up import SkillUpContextProvider
 from .contexts.user_info import UserInfoContextProvider
 from .models.models import CustomContexModel
 from .contexts.history import ChatHistoryProvider
 from .agents import generate_response_agent
 from .agents import triage_agent
-from .hooks.agent_run_hook import AgentRunHook
-from .stream.stream_handler import StreamHandler
+from .core.hooks.agent_run_hook import AgentRunHook
+from .core.stream.stream_handler import StreamHandler
 # Format stream hanlder
 from agents import RawResponsesStreamEvent, RunResultStreaming
 from openai.types.responses import ResponseTextDeltaEvent
-
 
 class ServiceManager:
     def __init__(
