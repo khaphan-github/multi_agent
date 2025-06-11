@@ -140,4 +140,7 @@ class ServiceManager:
                 )
             except Exception as e:
                 print(f"Error during agent run: {e}")
-                StreamHandler.stream_error_events(chat_id=_chat_id)
+                StreamHandler.stream_error_events(
+                    chat_id=_chat_id,
+                    error_msg=str(e)
+                )

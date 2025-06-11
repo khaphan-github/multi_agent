@@ -1,5 +1,6 @@
 import asyncio
 from modules.eduzaa_skill_up_agent_cluster.service_manager import ServiceManager
+import json
 
 
 async def extract_chat_id_from_stream(response_stream):
@@ -8,14 +9,18 @@ async def extract_chat_id_from_stream(response_stream):
     response_content = ""
 
     async for event in response_stream:
-        print(event, end='', flush=True)
-        response_content += str(event)
+        try:
+            # Parse the JSON text
+            event_data = json.loads(event)
+            print(event_data, end='', flush=True)
+            response_content += json.dumps(event_data)
 
-        # Extract chat_id from the response if available
-        if hasattr(event, 'chat_id'):
-            chat_id = event.chat_id
-        elif isinstance(event, dict) and 'chat_id' in event:
-            chat_id = event['chat_id']
+            # Extract chat_id from the parsed JSON if available
+            if 'chat_id' in event_data:
+                chat_id = event_data['chat_id']
+        except json.JSONDecodeError:
+            print(f"\n❌ Failed to parse JSON: {event}")
+            response_content += event
 
     return chat_id, response_content
 
