@@ -1,6 +1,8 @@
 import asyncio
 from modules.eduzaa_skill_up_agent_cluster.service_manager import ServiceManager
 import json
+import nest_asyncio
+nest_asyncio.apply()
 
 
 async def extract_chat_id_from_stream(response_stream):
@@ -25,7 +27,7 @@ async def extract_chat_id_from_stream(response_stream):
     return chat_id, response_content
 
 
-async def run_agent_transition_tests(service_manager, user_id, skill_id):
+async def run_agent_transition_tests(service_manager: ServiceManager, user_id, skill_id):
     """Run 4 automated messages to test agent transitions"""
     test_cases = [
         {
@@ -135,6 +137,7 @@ async def continuous_chat(service_manager, user_id, skill_id, chat_id):
 
 
 async def main():
+
     # Initialize ServiceManager
     service_manager = ServiceManager()
     user_id = "user_123"

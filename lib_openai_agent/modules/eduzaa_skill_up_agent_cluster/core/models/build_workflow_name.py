@@ -13,4 +13,4 @@ def build_workflow_name(
     Returns:
       str: A formatted workflow name.
     """
-    return f"{user_id}_{chat_id}"
+    return f"{workflow_name}_{user_id}_{chat_id}"
