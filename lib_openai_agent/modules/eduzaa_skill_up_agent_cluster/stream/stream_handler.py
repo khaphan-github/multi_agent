@@ -8,7 +8,7 @@ class StreamHandler:
         self.result = result
 
     @staticmethod
-    def stream_error_events(self, chat_id: str, call_back_stream_event_fn=None, call_back_final_response_fn=None, metadata=None):
+    def stream_error_events(chat_id: str, call_back_stream_event_fn=None, call_back_final_response_fn=None, metadata=None):
         yield {"chat_id": chat_id, "isError": True, "error": "An error occurred while processing the stream."}
 
     async def stream_events(self, chat_id: str, call_back_stream_event_fn=None, call_back_final_response_fn=None, metadata=None):
@@ -45,6 +45,4 @@ class StreamHandler:
                 call_back_final_response_fn(
                     chat_id=chat_id, events=final_response_event, metadata=metadata)
 
-        yield {"chat_id": chat_id}
-
-        yield '[DONE]'
+        yield {'chat_id': chat_id, 'isLast': True}
