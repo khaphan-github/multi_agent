@@ -72,6 +72,7 @@ class StreamHandler:
             if event.type == "raw_response_event" and isinstance(event.data, ResponseTextDeltaEvent):
                 # TODO: Change stream object to dict
                 delta = event.data.delta
+                # yield delta
                 yield StreamObject(chat_id=chat_id, content=delta).to_string()
 
         if call_back_final_response_fn:

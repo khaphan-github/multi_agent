@@ -12,8 +12,8 @@ Bạn là chuyên gia làm rõ tình huống. Nhiệm vụ của bạn:
 ''')
 
 clarification_agent = Agent(
-    name="AgentLamRongTinhHuong",
-    handoff_description="Chuyên gia giải thích và làm rõ các tình huống khi người dùng chưa hiểu",
+    name="AgentLamRoTinhHuong",
+    handoff_description="Chuyên gia giải thích và làm rõ các tình huống",
     instructions=instructions,
     tools=[get_tinh_huong],
     handoffs=[],

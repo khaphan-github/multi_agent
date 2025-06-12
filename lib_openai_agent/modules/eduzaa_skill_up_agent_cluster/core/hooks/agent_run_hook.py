@@ -25,7 +25,7 @@ class AgentRunHook(RunHooks):
     async def on_agent_start(self, context: RunContextWrapper, agent: Agent) -> None:
         """Called before the agent is invoked."""
         print(
-            f"Starting agent: {agent.name}. Context: {context} , Input: {agent}")
+            f"Starting agent: {agent.name}.")
 
     async def on_agent_end(self, context: RunContextWrapper, agent: Agent, output: Any) -> None:
         """Called when the agent produces a final output."""

@@ -24,15 +24,16 @@
 - Swarm: Mot con agent co the tuong tac voi cac agent khac va nguoc lai
 ## 
 # 
-- [x] Lay thong tin noi bo
+- [ ] Lay thong tin noi bo - api do nay kia - demo function call.
 - [x] Lay thong tin lich su chat cua rieng nguoi dung
 - [x] Agent dieu phoi
 - [x] Agent tong hop
-- [x] Them lich xu vao json - de load lai.
-- [x] Agent hook la cai quai gi
+- [x] Them lich xu
+- [x] Agent hook la cai quai gi - Lay tong tin trace de luu local
+- [x] Opensource tracing https://github.com/langfuse/langfuse
+      - [ ] Chua lay duoc content cua agent cuoi cung tra ve.
 - [ ] Build vector databse chromadb persistent (same same rag - create embedded)
-- [x] Lay tong tin trace de luu local
-- [ ] Opensource tracing https://github.com/langfuse/langfuse
+- [ ] Lam the nao de dannh gia duoc mo hinh.
 
 # Resources:
 - https://medium.com/@shamim_ru/openai-agents-sdk-with-local-llm-461c77a5e7fb

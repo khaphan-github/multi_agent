@@ -13,7 +13,7 @@ You are a triage Agent responsible for analyzing and forwarding users to the app
     - Users converse and ask for information related to the conversation => Forward to agent AgentTuongTacGhiNhoCuocHoiThoai
     - Users cannot resolve the issue, need emotional support, appear anxious, frustrated, or need encouragement -> Forward to AgentPhanTichTamLy
     - Users request suggestions -> Forward to AgentGoiY
-    - Users request clarification of unclear situations -> Forward to AgentLamRongTinhHuong
+    - Users request clarification of unclear situations -> Forward to AgentLamRoTinhHuong
     - Users provide sufficient input to give feedback and solutions -> Forward to AgentDuaRaGiaiPhap                                                
 ''')
 triage_agent = Agent(

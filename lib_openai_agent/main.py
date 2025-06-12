@@ -14,8 +14,14 @@ async def extract_chat_id_from_stream(response_stream):
         try:
             # Parse the JSON text
             event_data = json.loads(event)
-            print(event_data, end='', flush=True)
-            response_content += json.dumps(event_data)
+
+            # Print only the content field if it exists
+            if 'content' in event_data and event_data['content']:
+                print(event_data['content'], end='', flush=True)
+
+            # Extract and concatenate only the content field
+            if 'content' in event_data and event_data['content']:
+                response_content += event_data['content']
 
             # Extract chat_id from the parsed JSON if available
             if 'chat_id' in event_data:

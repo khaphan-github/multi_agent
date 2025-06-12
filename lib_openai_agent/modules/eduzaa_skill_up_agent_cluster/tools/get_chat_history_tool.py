@@ -9,5 +9,4 @@ async def get_chat_history(wrapper: RunContextWrapper[CustomContexModel]) -> str
     '''
     history = wrapper.context.history
     r = f"Lịch sử trò chuyện là:\n{history}"
-    print(r)
     return r
