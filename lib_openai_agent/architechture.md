@@ -43,7 +43,6 @@
    1.1: Skill (nghiep vu rieng) - prefix:skill:id -> luu info
    1.2. User (nghiep vu chung) - prefix:user:id -> luu info
    1.3. Chat (nghiep vu chung):
-       + Quan ly trang thai dong bo: prefix:sync_status:chat_id -> { last_updated: 170923871823000 }
        + Quan ly noi dung chat: prefix:chat:chat_id -> [{ author, content, created_time, metadata, ...}]
 2. database
    table: chat_history_sync
@@ -55,7 +54,8 @@
 
    table: chat_history_skill_up
    column:
-    - id: unique_id (generate tu code)
+    - chat_id: unique_id (generate tu code)
+    - message_id: unique_id (generate tu code)
     - user_type: string (AI|USER|AGENT|SYSSTEM bla bal - de mo trong)
     - content: text
     - previous_message_id: ()
