@@ -1,71 +1,72 @@
-# Bao quat he thong
-- Dich vu multi agent se setup rieng.
-- Chu dong ket noi: database, redis.
-- Cung cap cac API de tuong tac voi he thong khac.
+# Bao quát hệ thống
+- Dịch vụ multi agent sẽ setup riêng.
+- Chủ động kết nối: database, redis.
+- Cung cấp các API để tương tác với hệ thống khác.
 
-# Flow nguoi dung tuong tac:
-1. Flow chat giai quyet van de (Thong qua agent dieu phoi):
-- Chat -> Agent dieu phoi -> [Ds cac agent] => Agent tong hop -> Out. (loai content final, defautl.)
+# Flow người dùng tương tác:
+1. Flow chat giải quyết vấn đề (Thông qua agent điều phối):
+- Chat -> Agent điều phối -> [Ds các agent] => Agent tổng hợp -> Out. (loại content final, defautl.)
 
-2. Flow goi y: (Khong thong qua agent dieu phoi)
-- Phan hoi thanh cong - goi chat goi y -> Agent goi y -> Out. Array goi y[]
+2. Flow gợi ý: (Không thông qua agent điều phối)
+- Phản hồi thành công - gọi chat gợi ý -> Agent gợi ý -> Out. Array gợi ý[]
 
-# Xu ly ngu canh: (Thanh phan chung - nen viet de co the tai su dung.)
-1. Nap ngu canh:
+# Xử lý ngữ cảnh: (Thành phần chung - nên viết để có thể tái sử dụng.)
+1. Nạp ngữ cảnh:
   - Input: chat_id, skill_id, user_id
-  - Logic: Lay thong tin:{ user, history, skill }
-        + User: Lay thong tin theo contact id (cache lai redis  co TTL ngan (5 phut / 20 phut))
-        + Skill: Lay thong tin theo skill_id (cache lai redis - TTL ngan (5 phut / 20 phut))
+  - Logic: Lấy thông tin:{ user, history, skill }
+        + User: Lấy thông tin theo contact id (cache lại redis có TTL ngắn (5 phút / 20 phút))
+        + Skill: Lấy thông tin theo skill_id (cache lại redis - TTL ngắn (5 phút / 20 phút))
         + History: 
-            + Truong hop chat moi: (Khong co trong redis & db) => []
-            + Truong hop chat da co lich su:
-                - Neu chua co trong redis -> lay tu db (full) -> nap redis
-                - Neu da co trong redis -> lay tu redis (full).
+            + Trường hợp chat mới: (Không có trong redis & db) => []
+            + Trường hợp chat đã có lịch sử:
+                - Nếu chưa có trong redis -> lấy từ db (full) -> nạp redis
+                - Nếu đã có trong redis -> lấy từ redis (full).
   - Output: { user, history, skill }
 
-2. Luu ngu canh: (Luong nay khogn anh huong den stream - co the chay async)
+2. Lưu ngữ cảnh: (Luồng này không ảnh hưởng đến stream - có thể chạy async)
   - Input: { chat_content, chat_id, metadata,...}
-  - Logic: Luu thong tin vao redis (Luon luon luu vao redis)
+  - Logic: Lưu thông tin vào redis (Luôn luôn lưu vào redis)
   - Output: { success }
 
-3. Giai phong/Luu tru:
-  - Giai phong: (Lam trong redis - khi data khong con duoc su dung)
-      - Sau khoan thoi gian x time - du lieu tren redis se bi xoa boi job.
-        + Kiem tra da dong bo xuong db chua (Kiem tra ntn ??????)
-          - truong hop chua - se khong xoa.
-          - truong hop roi - se xoa.
-  - Luu tru:
-      - Bot dong bo lich su - phuc vu luu tru: 
-        + Sau x time se chay job de dong bo voi db - [KHONG XOA REDIS]. (theo chat id - lastupdatedtime)
+3. Giải phóng/Lưu trữ:
+  - Giải phóng: (Làm trong redis - khi data không còn được sử dụng)
+      - Sau khoản thời gian x time - dữ liệu trên redis sẽ bị xóa bởi job.
+        + Kiểm tra đã đồng bộ xuống db chưa (Kiểm tra như thế nào ??????)
+          - trường hợp chưa - sẽ không xóa.
+          - trường hợp rồi - sẽ xóa.
+  - Lưu trữ:
+      - Bot đồng bộ lịch sử - phục vụ lưu trữ: 
+        + Sau x time sẽ chạy job để đồng bộ với db - [KHÔNG XÓA REDIS]. (theo chat id - lastupdatedtime)
 
-# Cau truc luu tru:
+# Cấu trúc lưu trữ:
 1. redis
-   1.1: Skill (nghiep vu rieng) - prefix:skill:id -> luu info
-   1.2. User (nghiep vu chung) - prefix:user:id -> luu info
-   1.3. Chat (nghiep vu chung):
-       + Quan ly noi dung chat: prefix:chat:chat_id -> [{ author, content, created_time, metadata, ...}]
+   1.1: Skill (nghiệp vụ riêng) - prefix:skill:id -> lưu info
+   1.2. User (nghiệp vụ chung) - prefix:user:id -> lưu info
+   1.3. Chat (nghiệp vụ chung):
+       + Quản lý nội dung chat: prefix:chat:chat_id -> [{ author, content, created_time, metadata, ...}]
 2. database
-   table: chat_history_sync
+   table: chat_history_sync (Lưu trạng thái sync và thời gian cuối cùng sync.)
     column:
-      - chat_id: unique_id (generate tu code)
+      - chat_id: unique_id (generate từ code)
       - timeupdated: number (get number).
       - status: LASTEST | ERROR | SYNCING
-      - metadata: json (luu thong tin ve trang thai dong bo)
+      - metadata: json (lưu thông tin về trạng thái đồng bộ)
 
    table: chat_history_skill_up
    column:
-    - chat_id: unique_id (generate tu code)
-    - message_id: unique_id (generate tu code)
-    - user_type: string (AI|USER|AGENT|SYSSTEM bla bal - de mo trong)
+    - chat_id: unique_id (generate từ code)
+    - message_id: unique_id (generate từ code)
+    - user_type: string (AI|USER|AGENT|SYSSTEM bla bla - để mở rộng)
     - content: text
     - previous_message_id: ()
-    - metadata: json (muon luu gi cung duoc - chua thong tin chat)
+    - metadata: json (muốn lưu gì cũng được - chứa thông tin chat)
     - timecreated: datetime
     - timeupdated: datetime
-# Cung cap du lieu lich su.
-  - API: get danh sach lich su chat theo truy van (metadata) -> muc dich mo rong - khong bi theo nghiep vu. (Khong cache - hoac cache voi key khac voi logic xu lu context)
 
-# Tao mot cum multi agent khac:
-- Tao mot module voi cacs thanh phan giong voi cai hien co - thay doi logic ben trong.
-- Them route.
+# Cung cấp dữ liệu lịch sử.
+  - API: get danh sách lịch sử chat theo truy vấn (metadata) -> mục đích mở rộng - không bị theo nghiệp vụ. Luồng get lịch sử trong redis.
+
+# Tạo một cụm multi agent khác:
+- Tạo một module với các thành phần giống với cái hiện có - thay đổi logic bên trong.
+- Thêm route.
 
