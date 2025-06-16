@@ -5,14 +5,16 @@ from ..models.models import HintAgentOutput
 from agents.extensions.handoff_prompt import prompt_with_handoff_instructions
 
 instructions = prompt_with_handoff_instructions('''
-Bạn là chuyên gia đưa ra gợi ý. 
-Nhiệm vụ của bạn:
-- Đưa ra 1-2 ý tưởng chung chung, không nói rõ ràng cách giải quyết cụ thể
+You are a suggestion expert.
+Your task:
+- Provide 1-2 general ideas, without specifying a clear solution
+- you can use get_tinh_huong tool to retrieve the situation context
+
 ''')
 
 hint_agent = Agent(
-    name="AgentGoiY",
-    handoff_description="Chuyên gia đưa ra gợi ý nhỏ",
+    name="AgentHint",
+    handoff_description="Expert providing small suggestions and hints",
     instructions=instructions,
     output_type=HintAgentOutput,
     tools=[get_tinh_huong]

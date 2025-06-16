@@ -1,7 +1,8 @@
 # VIet service goi client
 # Service goi runnder.
 
-from agents import Runner, trace
+from re import A
+from agents import RunResult, Runner, trace
 from .core.models.build_chat_id import build_chat_id
 from .core.models.build_workflow_name import build_workflow_name
 from .contexts.skill_up import SkillUpContextProvider
@@ -11,7 +12,7 @@ from .contexts.history import ChatHistoryProvider
 from .agents import generate_response_agent
 from .agents import triage_agent
 from .core.hooks.agent_run_hook import AgentRunHook
-from .core.stream.stream_handler import StreamHandler
+from .stream.stream_handler import StreamHandler
 # Format stream hanlder
 from agents import RawResponsesStreamEvent, RunResultStreaming
 from openai.types.responses import ResponseTextDeltaEvent
@@ -93,7 +94,21 @@ class ServiceManager:
             'role': 'user'
         }, False)
 
-    async def run(self, user_id: str = None, chat_id: str = None, skill_id: str = None, messsage: str = None, agent=triage_agent, out_agent=generate_response_agent, ):
+    def get_last_response_type(self, run_result: RunResult) -> str:
+        """
+        :param run_result: Kết quả của quá trình chạy
+        :return: Tên của agent cuối cùng
+        """
+        agent_name = ''
+        if isinstance(run_result, RunResult):
+            agent_name = run_result.last_agent.name
+        if agent_name == 'AgentDuaRaGiaiPhap':
+            return 'end'
+        elif agent_name == 'AgentDuaRaGoiY':
+            return 'hint'
+        return 'default'
+
+    async def run(self, user_id: str = None, chat_id: str = None, skill_id: str = None, message: str = None, agent=triage_agent, out_agent=generate_response_agent, ):
         """
         Chạy dịch vụ với các tham số đã cho.
         :param user_id: ID người dùng
@@ -107,7 +122,7 @@ class ServiceManager:
             user_id=user_id,
             chat_id=_chat_id,
             skill_id=skill_id,
-            message=messsage
+            message=message
         )
 
         context = self.get_context(
@@ -119,23 +134,32 @@ class ServiceManager:
             try:
                 result = await Runner.run(
                     starting_agent=agent,
-                    input=messsage,
+                    input=message,
                     context=context,
                     hooks=AgentRunHook()
                 )
+                print(f"Result: {result.final_output}")
 
                 # Pass result to generate_response_agent
+                # Handle logic detech resposne from
+                # hint agent. -> set metadata is type = hint
+                # solution agent. -> set metadata is type = solution
+                agent_type = self.get_last_response_type(result)
+
                 new_input = result.to_input_list()
-                result = Runner.run_streamed(
+                stream_result = Runner.run_streamed(
                     out_agent, new_input
                 )
 
-                return StreamHandler(result).stream_events(
+                return StreamHandler(stream_result).stream_events(
                     chat_id=_chat_id,
                     call_back_final_response_fn=self._save_final_response,
                     metadata={
                         'user_id': user_id,
-                        'skill_id': skill_id
+                        'skill_id': skill_id,
+                        'chat_id': _chat_id,
+                        'display_template': agent_type,
+                        'display_content': result.final_output.hint,
                     }
                 )
             except Exception as e:

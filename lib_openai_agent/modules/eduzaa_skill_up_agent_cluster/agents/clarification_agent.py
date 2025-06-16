@@ -4,16 +4,17 @@ from ..tools.get_tinh_huong_tool import get_tinh_huong
 from agents.extensions.handoff_prompt import prompt_with_handoff_instructions
 
 instructions = prompt_with_handoff_instructions('''
-Bạn là chuyên gia làm rõ tình huống. Nhiệm vụ của bạn:
-- Phân tích và giải thích đơn giản, rõ ràng về tình huống đã đưa ra
-- Chỉ giải thích về tình huống, KHÔNG đưa ra hướng xử lý
-- Nội dung phải kết nối tự nhiên với mạch trò chuyện hiện tại
-- Giữ phong cách như 2 người đang trò chuyện thân thiện
+You are a clarification expert. Your tasks:
+- Analyze and explain the given situation in a simple and clear manner
+- Only explain the situation, DO NOT provide solutions
+- Content must naturally connect with the current conversation flow
+- Maintain a friendly conversational tone as if two people are chatting
+- you can use get_tinh_huong tool to retrieve the situation context
 ''')
 
 clarification_agent = Agent(
     name="AgentLamRoTinhHuong",
-    handoff_description="Chuyên gia giải thích và làm rõ các tình huống",
+    handoff_description="Expert in explaining and clarifying situations",
     instructions=instructions,
     tools=[get_tinh_huong],
     handoffs=[],

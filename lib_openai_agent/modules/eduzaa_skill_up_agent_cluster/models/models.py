@@ -35,14 +35,14 @@ class HintAgentOutput(BaseModel):
 class GenerateResponseAgentOutput(BaseModel):
     type_result: str = Field(
         description='''
-        Dinh dang ket qua tra ve ung voi tung nghiep vu cu the
-        - hint: Kết quả từ Agent Gợi ý
-        - emotions: Kết quả từ Agent Tâm lý
-        - solution: Kết quả từ Agent Giải pháp Hệ thống
-        - clarification: Kết quả từ Agent Làm rõ tình huống
-        - other: Kết quả từ Agent khác không thuộc các loại trên
-        '''
+        Format of the returned result corresponding to each specific task:
+        - hint: Result from the Hint Agent
+        - emotions: Result from the Psychology Agent
+        - solution: Result from the System Solution Agent
+        - clarification: Result from the Situation Clarification Agent
+        - other: Result from other Agents not belonging to the above categories
+        ''',
     )
     response: str | List[str] = Field(
-        description="Phản hồi cuối cùng cho người dùng",
+        description="Final response for the user",
     )

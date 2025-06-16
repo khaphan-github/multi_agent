@@ -2,67 +2,12 @@
   {
     "metadata": {
       "user_id": "user_123",
-      "skill_id": "2"
+      "skill_id": "1"
     },
-    "chat_id": "ag_chat_529c395f-a711-433a-a59a-c0881e5ff873",
+    "chat_id": "ag_chat_934e49bb-3d8d-4998-9433-8cc84bd48d22",
     "content": "Chao ban!",
     "role": "user",
-    "created_at": "2025-06-09T09:36:53.976537",
-    "updated_at": "2025-06-09T09:36:53.976545"
-  },
-  {
-    "metadata": {
-      "user_id": "user_123",
-      "skill_id": "2"
-    },
-    "chat_id": "ag_chat_529c395f-a711-433a-a59a-c0881e5ff873",
-    "content": "{\"type_result\":\"other\",\"response\":\"Chào bạn! Bạn cần hỗ trợ gì hôm nay?\"}",
-    "role": "assistant",
-    "created_at": "2025-06-09T09:36:56.835135",
-    "updated_at": "2025-06-09T09:36:56.835138"
-  },
-  {
-    "metadata": {
-      "user_id": "user_123",
-      "skill_id": "2"
-    },
-    "chat_id": "ag_chat_c13e38ca-baaf-4648-942d-a985537788c2",
-    "content": "Ten cua toi la Nguyen Van A, toi muon tim hieu ve ky nang giao tiep",
-    "role": "user",
-    "created_at": "2025-06-09T09:36:56.835512",
-    "updated_at": "2025-06-09T09:36:56.835514"
-  },
-  {
-    "metadata": {
-      "user_id": "user_123",
-      "skill_id": "2"
-    },
-    "chat_id": "ag_chat_c13e38ca-baaf-4648-942d-a985537788c2",
-    "content": "{\"type_result\":\"clarification\",\"response\":\"Bạn thích phát triển kỹ năng nào trong giao tiếp hơn, như khả năng lắng nghe, thuyết phục hay thể hiện bản thân?\"}",
-    "role": "assistant",
-    "created_at": "2025-06-09T09:37:00.858367",
-    "updated_at": "2025-06-09T09:37:00.858369"
-  },
-  {
-    "metadata": {
-      "user_id": "user_123",
-      "skill_id": "2"
-    },
-    "chat_id": "ag_chat_c13e38ca-baaf-4648-942d-a985537788c2",
-    "content": "Ten cua toi la gi?",
-    "role": "user",
-    "created_at": "2025-06-09T09:37:05.727228",
-    "updated_at": "2025-06-09T09:37:05.727235"
-  },
-  {
-    "metadata": {
-      "user_id": "user_123",
-      "skill_id": "2"
-    },
-    "chat_id": "ag_chat_c13e38ca-baaf-4648-942d-a985537788c2",
-    "content": "\n{\"type_result\":\"other\",\"response\":\"\\nChào Nguyễn Văn A! Cần hỗ trợ thêm gì nữa không?\"}",
-    "role": "assistant",
-    "created_at": "2025-06-09T09:37:10.540483",
-    "updated_at": "2025-06-09T09:37:10.540486"
+    "created_at": "2025-06-16T04:21:55.439208",
+    "updated_at": "2025-06-16T04:21:55.439216"
   }
 ]

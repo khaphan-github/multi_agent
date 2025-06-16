@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SSE and Fetch API Example</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    #messages {
+      border: 1px solid #ccc;
+      padding: 10px;
+      height: 200px;
+      overflow-y: scroll;
+      margin-bottom: 20px;
+    }
+
+    #userQuery {
+      width: 300px;
+      padding: 10px;
+    }
+
+    #sendButton {
+      padding: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Server-Sent Events and Fetch API Example</h1>
+  <div id="messages"></div>
+
+  <input type="text" id="userQuery" placeholder="Enter your query here" value="cho tôi biết thời gian hiện tại?" />
+  <button id="sendButton">Send Query</button>
+
+  <script>
+    localStorage.removeItem("thread_id"); // Clear thread_id from localStorage on reload
+
+    function getQueryParam(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param);
+    }
+    // Function to handle the EventSource connection for SSE
+    // Handle sending user query
+    const sendButton = document.getElementById("sendButton");
+    const userQueryInput = document.getElementById("userQuery");
+    function handleStreamResponse(response) {
+      if (!response.ok) {
+        throw new Error(`Server responded with ${response.status}: ${response.statusText}`);
+      }
+
+      // Get the reader and the decoder for the response stream
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder("utf-8");
+      const div = document.getElementById("messages"); // Get the div element
+
+      // Recursive function to process the stream data
+      return reader.read().then(function processText({ done, value }) {
+        if (done) {
+          console.log("Stream closed by the server");
+          return;
+        }
+
+        // Decode the stream data
+        const text = decoder.decode(value, { stream: true });
+
+        // Parse the received text assuming it contains JSON formatted as:
+        // id: 1 data: {"index":0,"type":"text","text":{"annotations":[],"value":"Xin"}}
+        const lines = text.split("\n");
+        lines.forEach((line) => {
+          if (line.startsWith("data: ")) {
+            const jsonData = line.slice(6); // Remove "data: " prefix
+            try {
+              const parsedData = JSON.parse(jsonData);
+              const value = parsedData.text?.value; // Access the "value" field
+              const isLast = parsedData.isLast === "true"; // Check if it's the last message
+              const threadId = parsedData.thread_id; // Access the thread_id
+
+              if (value) {
+                div.innerHTML += value; // Append value to div
+              }
+
+              if (isLast && threadId) {
+                localStorage.setItem("thread_id", threadId); // Save thread_id in localStorage
+              }
+            } catch (err) {
+              console.error("Failed to parse JSON:", err);
+            }
+          }
+        });
+
+        // Continue reading the stream
+        return reader.read().then(processText);
+      });
+    }
+
+    // Function to handle fetch errors
+    function handleFetchError(error) {
+      console.error("Error:", error);
+      const div = document.getElementById("messages");
+      
+      if (error.name === 'AbortError') {
+        div.innerHTML = "Request was aborted or timed out. Please try again.";
+      } else if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
+        div.innerHTML = "Network error. Please check your connection and try again.";
+      } else if (error.message.includes('Server responded with')) {
+        div.innerHTML = error.message;
+      } else {
+        div.innerHTML = "An error occurred: " + error.message;
+      }
+    }
+    
+    sendButton.addEventListener("click", () => {
+      const userQuery = userQueryInput.value;
+      const threadId = localStorage.getItem("thread_id"); // Retrieve thread_id from localStorage
+      const url = new URL("http://127.0.0.1:8001/api/openai/skill-up/chat");
+      if (threadId) {
+        url.searchParams.append("thread_id", threadId); // Add thread_id as a query parameter
+      }
+
+      const div = document.getElementById("messages");
+      div.innerHTML = "Đang tìm kiếm...";
+      
+      // Create AbortController to handle timeout
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
+      
+      // Send a request to the server endpoint
+      fetch(url.toString(), {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "text/event-stream", // Expecting an event stream
+          "x-contactid": 1937,
+        },
+        body: JSON.stringify({
+          message: userQuery,
+          chat_id: "", // Added chat_id field
+          skill_id: "123" // Added skill_id field
+        }),
+        signal: controller.signal // Add AbortSignal to the request
+      })
+        .then(handleStreamResponse)
+        .catch(handleFetchError)
+        .finally(() => clearTimeout(timeoutId));
+    });
+  </script>
+</body>
+
+</html>

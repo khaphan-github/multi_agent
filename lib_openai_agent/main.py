@@ -37,28 +37,38 @@ async def run_agent_transition_tests(service_manager: ServiceManager, user_id, s
     """Run 4 automated messages to test agent transitions"""
     test_cases = [
         {
-            "message": "Ten cua toi la Nguyen Van A, toi muon tim hieu ve ky nang giao tiep",
-            "description": "=> Agent phân loại"
+            "message": "Tin tuc ve cong nghe moi nhat",
+            "description": "=> Agent phân loại -> AgentLamRoTinhHuong"
         },
         {
-            "message": "Chịu, tôi không nghỉ ra được bất cứ điều gì",
-            "description": "=> Agent phân loại"
+            "message": "Bay gioi la may gio",
+            "description": "=> Agent phân loại -> AgentLamRoTinhHuong"
         },
         {
-            "message": "Cho 1 gợi ý nhỏ",
-            "description": "=> Chuyển sang Agent Gợi ý"
+            "message": "Hom nay la ngay dep troi",
+            "description": "=> Agent phân loại -> AgentTuongTacGhiNhoCuocHoiThoai"
         },
         {
-            "message": "Tôi chưa hiểu rõ nội dung tình huống",
-            "description": "=> Chuyển sang Agent Làm rõ tình huống"
+            "message": "Toi chua biet xu ly sao",
+            "description": "=> Agent phân loại -> AgentPhanTichTamLy"
         },
         {
-            "message": """Xem xét kỹ hơn các tài liệu dự án;
-        Làm việc với các bên liên quan để nắm rõ yêu cầu và nguồn lực;
-        Xác định các yếu tố rủi ro có thể ảnh hưởng đến tiến độ.
-        Tôi dự kiến sẽ hoàn tất việc đánh giá sơ bộ trong vòng [1–2 ngày làm việc]""",
-            "description": "=> Agent solution"
+            "message": "goi y giup toi",
+            "description": "=> Agent phân loại -> AgentGoiY"
+        },
+        {
+            "message": "Toi chua hieu ro noi dung tinh huong",
+            "description": "=> Agent phân loại -> AgentLamRoTinhHuong"
+        },
+        {
+            "message": "Hay lam ro tinh huong nay",
+            "description": "=> Agent phân loại -> AgentLamRoTinhHuong"
+        },
+        {
+            "message": "",
+            "description": "=> Agent phân loại -> AgentDuaRaGiaiPhap"
         }
+
     ]
 
     chat_id = None

@@ -23,8 +23,20 @@ Bạn là Agent tạo phản hồi. Nhiệm vụ của bạn:
 - Giữ phong cách như 2 người đang trò chuyện thân thiện.
 ''')
 
+
+instructions_v1 = prompt_with_handoff_instructions('''
+Bạn là Agent tạo phản hồi. Nhiệm vụ của bạn:
+- Nhận câu trả lời của các AI Agent khác và tạo phản hồi cuối cùng cho người dùng.
+- Trả lời câu hỏi ngắn gọn, rõ ràng, tự nhiên và cuốn hút.
+- Sử dụng emoji, ngắt dòng hợp lý, làm nổi bật từ khóa quan trọng, tạo cảm giác gần gũi.
+- Dựa trên câu trả lời của người dùng, hãy gợi ý câu trả lời tốt hơn (dưới 30 từ), viết lại câu trả lời mẫu ngắn gọn hơn, hiệu quả hơn, dễ áp dụng ngay lập tức.
+- Nội dung kết nối tự nhiên với mạch trò chuyện hiện tại.
+- Giữ phong cách như hai người đang trò chuyện thân thiện.
+Lưu ý:
+- Nếu nhận phản hồi từ AgentHint hãy tóm tắt ngắn gọn tình huống và kèm lời dẫn: Bạn có thể tham khảo một số gợi ý dưới đây.
+''')
 generate_response_agent = Agent(
     name="Agent Tạo phản hồi",
-    instructions=instructions,
-    output_type=GenerateResponseAgentOutput
+    instructions=instructions_v1,
+    # output_type=GenerateResponseAgentOutput
 )
